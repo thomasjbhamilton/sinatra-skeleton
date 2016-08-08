@@ -1,0 +1,36 @@
+
+<h1>What incredible song did you want to add?</h1>
+
+<% if @song && @song.errors.any? %>
+  <div class="">
+    <strong>Some issues with the song you are trying to add! Let's fix these:</strong>
+    <ul>
+      <% @song.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form class="" action="/songs" method="post">
+
+  <div class="">
+    <label> Song Title:</label>
+    <input type="text" name="song_title" value="<%= @song.song_title %>">
+  </div>
+
+  <div class="">
+    <label> Artist:</label>
+    <input type="text" name="author" value="<%= @song.author %>">
+  </div>
+
+  <div class="">
+    <label> Spotify Link:</label>
+    <input type="text" name="url" value="<%= @song.url %>">
+  </div>
+
+  <div class="">
+    <input type="submit" value="submit">
+  </div>
+
+</form>
