@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row room">
+    <form class="col offset-s2 s8" action="/users" method="post">
+      <h2 class="center">Sign-up!</h2>
+      <% if @user.errors.any? %>
+        <div class="">
+          <strong>Some issues with the user you are trying to add! Let's fix these:</strong>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="input-field col s6">
+          <label> User Name:</label>
+          <input type="text" name="username" value="<%= @user.username %>">
+        </div>
+        <div class="input-field col s6">
+          <label> Password:</label>
+          <input  type="password" name="password" value="<%= @user.password %>">
+        </div>
+      </div>
+      <div class="center">
+        <button class="btn waves-effect waves-light amber accent-4" type="submit" value="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -5,20 +5,39 @@
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
+
   -->
   <link rel="stylesheet" href="/stylesheets/normalize.css">
   <!--
     application.css is where you put your styles
   -->
+  <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.css"  media="screen,projection"/>
   <link rel="stylesheet" href="/stylesheets/application.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascript/materialize.js"></script>
   <script src="/javascript/application.js"></script>
 
   <title></title>
 </head>
-<body>
-  <%= yield %>
-</body>
+  <body class="grey lighten-5">
+    <nav class="light-blue accent-3">
+      <div class="nav-wrapper">
+        <div class="container">
+          <a href="/" class="brand-logo">HOME</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/songs">All songs</a></li>
+            <li><a href="/songs/new">New Song</a></li>
+            <% if logged_out? %>
+              <li><a href="/login">login</a></li>
+            <% else %>
+              <li><a href="/logout">Logout</a></li>
+              <li><%= current_user.username %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <%= yield %>
+  </body>
 </html>
-

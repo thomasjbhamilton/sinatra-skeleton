@@ -1,16 +1,18 @@
-
-<h1>Check out all of the awesome songs people had added!</h1>
-
-<p>
-  Feel free to add your own song <a href="songs/new">here!</a>
-</p>
-
-<hr/>
-<% @songs.each do |song| %>
-  <div class="song">
-    <h3><a href="/songs/<%= song.id %>"><%= song.song_title %></a> <small>(by: <%= song.author %>)</small></h3>
-    <p>
-      Check out the song at the link here: <a href="<%= song.url %>"><%= song.url %></a>
-    </p>
-  </div>
-<% end %>
+<div class="container">
+  <h2>Check out all of the awesome songs people have added!</h2>
+  <p>
+    Feel free to add your own song <a href="songs/new">here!</a>
+  </p>
+  <hr/>
+  <% @songs.each do |song| %>
+    <div class="song">
+      <h4><a href="/songs/<%= song.id %>"><%= song.song_title %></a> <small>(by: <%= song.author %>)</small></h4>
+      <p>
+        Check out the song at the link here: <a href="<%= song.url %>"><%= song.url %></a>
+      </p>
+      <p>
+        <%= song.votes.count %>
+      </p>
+    </div>
+  <% end %>
+</div>
