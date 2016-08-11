@@ -1,7 +1,53 @@
 <div class="container">
-  <h1><%= @song.song_title %></h1>
-  <h4>(by: <%= @song.author %>)</h4>
+  <h2><%= @song.song_title %> <small>(by: <%= @song.author %>)</small></h2>
   <p>
     Check out the song on <a href="<%= @song.url %>">Spotify</a>
   </p>
+  <%if Review.where("#{@song.id} = song_id AND user_id = #{current_user.id}") == [] %>
+    <div class="row">
+      <form class="col s8" action="/reviews/<%= @song.id %>" method="post">
+        <div class="row">
+          <div class="input-field col s12">
+            <label> Comments:</label>
+            <input type="text" name="comment">
+          </div>
+          <div class="input-field col s12">
+            <select name="rating">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="1">star 1</option>
+              <option value="2">star 2</option>
+              <option value="3">star 3</option>
+              <option value="3">star 4</option>
+              <option value="3">star 5</option>
+            </select>
+            <label>Materialize Select</label>
+          </div>
+         <div class="col s12">
+           <input class="waves-effect waves-teal btn-flat" type="submit" value="Leave a Review">
+         </div>
+       </div>
+      </form>
+    </div>
+  <% end %>
+  <h4>Check out what other are saying!</h4>
+  <% all_reviews.each do |review| %>
+    <% if review.song.id == @song.id %>
+      <ul>
+        <li>
+          <div class="col s4">
+             <h5><%= review.comment %></h5>
+          </div>
+          <div class="col s4 offset-s2">
+            ------ says: <%= review.user.username %>
+          </div>
+        </li>
+        <% if review.user.id == current_user.id %>
+          <form class="" action="/reviews/destroy/<%= review.id %>" method="post">
+            <input type="hidden" name="song_id" value="<%= @song.id %>">
+            <input class="waves-effect waves-teal btn-flat" type="submit" name="review" value="delete review">
+          </form>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
 </div>

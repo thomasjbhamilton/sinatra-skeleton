@@ -4,15 +4,21 @@
     Feel free to add your own song <a href="songs/new">here!</a>
   </p>
   <hr/>
-  <% @songs.each do |song| %>
+  <% @songs.sort {|x, y| x.votes.cout <=> y.votes.count}.each do |song| %>
     <div class="song">
       <h4><a href="/songs/<%= song.id %>"><%= song.song_title %></a> <small>(by: <%= song.author %>)</small></h4>
       <p>
         Check out the song at the link here: <a href="<%= song.url %>"><%= song.url %></a>
       </p>
-      <p>
-        <%= song.votes.count %>
-      </p>
+      <div class="row">
+        <div class="col s12">added by: User <%= song.user.username %></div>
+        <div class="col s1 vote-count-space"><%= song.votes.count %> votes!</div>
+        <div class="col s2 vote-like-button-space">
+          <form class="" action="songs/votes/<%= song.id %>" method="post">
+            <input class="btn-floating btn-med waves-effect waves-light green" type="submit" name="Upvote!" value="Like">
+          </form>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

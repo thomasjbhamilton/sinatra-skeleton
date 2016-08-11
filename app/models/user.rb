@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
-  has_many :votes
-  has_many :songs, through: :votes
 
+  has_many :songs
+  has_many :votes
+  has_many :reviews
+  has_many :songs, through: :votes
+  has_many :songs, through: :reviews
 
   validates :username,
     presence: true,
